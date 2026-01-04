@@ -1,0 +1,4 @@
+# Add your resume.pdf file here
+# Files in the public directory are served from the root URL
+# So public/resume.pdf will be accessible at /resume.pdf
+
