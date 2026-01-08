@@ -6,8 +6,6 @@ import { ThemeProvider } from "@/components/ThemeProvider"
 import { Footer } from "@/components/Footer"
 import { profile } from "@/data/profile"
 import { TechCursor } from "@/components/TechCursor"
-import AnimatedBackground from "@/components/AnimatedBackground"
-import { CursorGlow } from "@/components/CursorGlow"
 
 
 const fontSans = Inter({
