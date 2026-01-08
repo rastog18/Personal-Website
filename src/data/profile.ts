@@ -46,6 +46,7 @@ export type ProfileData = {
   headline: string
   about: string
   email: string
+  profileImage?: string
   socials: Socials
   projects: Project[]
   hackathons: Hackathon[]
@@ -53,12 +54,13 @@ export type ProfileData = {
 }
 
 export const profile: ProfileData = {
-  name: "Shivam Rastogi",
+  name: "Shivam",
   headline:
-    "CS student building fast, real-time products — from web apps to computer vision — with a bias for shipping.",
+    "Shivam Rastogi",
   about:
-    "I like turning messy problems into crisp interfaces and reliable systems. Recently I've been focused on performance, accessibility, and building end-to-end projects that feel polished enough to ship.",
+    "I'm a computer science student at Purdue University passionate about AI/ML, blockchain development, and building full-stack applications that solve real problems.",
   email: "rastog18@purdue.edu",
+  profileImage: "/profile.jpeg", // Add your profile image to /public/profile.jpg
   socials: {
     github: "https://github.com/rastog18",
     linkedin: "https://www.linkedin.com/in/rastog18"

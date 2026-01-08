@@ -1,6 +1,6 @@
-import { HomeClient } from "@/components/HomeClient"
+import { MinimalHomeClient } from "@/components/MinimalHomeClient"
 import { profile } from "@/data/profile"
 
 export default function Page() {
-  return <HomeClient data={profile} />
+  return <MinimalHomeClient data={profile} />
 }

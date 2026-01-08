@@ -6,7 +6,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-sans)", "ui-sans-serif", "system-ui"]
+        sans: ["var(--font-sans)", "ui-sans-serif", "system-ui"],
+        serif: ["var(--font-serif)", "ui-serif", "Georgia"]
       },
       boxShadow: {
         soft: "0 10px 30px rgba(0,0,0,0.08)",

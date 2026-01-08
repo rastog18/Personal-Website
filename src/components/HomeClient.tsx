@@ -14,8 +14,10 @@ import ExperienceTimeline from "@/components/ExperienceTimeline"
 import { Contact } from "@/components/Contact"
 import { SocialLinks } from "@/components/SocialLinks"
 import { HeroOverlay } from "@/components/HeroOverlay"
+import { LinkedInEmbeds } from "@/components/LinkedInEmbeds"
 
 import { collectSkills, skillCounts, type ProfileData } from "@/data/profile"
+import { linkedInPostUrls } from "@/data/linkedinPosts"
 
 function matchesAllTags(itemTags: string[], active: string[]) {
   if (active.length === 0) return true
@@ -248,6 +250,24 @@ export function HomeClient({ data }: { data: ProfileData }) {
           <ExperienceTimeline items={data.experience} />
         </Section>
       </div>
+
+      {/* LINKEDIN POSTS */}
+      {linkedInPostUrls.length > 0 && (
+        <div className="mt-12">
+          <Section
+            id="posts"
+            title="Posts"
+            subtitle="Recent thoughts and updates. Click any post to view on LinkedIn."
+          >
+            <LinkedInEmbeds
+              postUrls={linkedInPostUrls}
+              maxDisplay={6}
+              showViewAll={true}
+              linkedinProfileUrl={data.socials.linkedin}
+            />
+          </Section>
+        </div>
+      )}
 
       {/* CONTACT */}
       <div className="mt-12">

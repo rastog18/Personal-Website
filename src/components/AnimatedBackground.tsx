@@ -1,6 +1,7 @@
 /* CSS-based animated background - eye-catching but tasteful */
 "use client"
 
+import { useEffect, useState } from "react"
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion"
 
 // Configuration constants (tune easily)
@@ -12,6 +13,14 @@ const CONFIG = {
 
 export default function AnimatedBackground() {
   const prefersReducedMotion = usePrefersReducedMotion()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  // Don't render blobs until after hydration to avoid mismatch
+  const showAnimatedBlobs = mounted && !prefersReducedMotion
 
   return (
     <div
@@ -22,7 +31,7 @@ export default function AnimatedBackground() {
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/30 via-purple-50/20 to-pink-50/30 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-pink-950/40" />
 
       {/* Animated gradient blobs */}
-      {!prefersReducedMotion && (
+      {showAnimatedBlobs && (
         <>
           <div
             className="absolute -top-1/4 -left-1/4 w-[800px] h-[800px] rounded-full opacity-40 blur-3xl mix-blend-multiply dark:mix-blend-screen"
@@ -48,8 +57,8 @@ export default function AnimatedBackground() {
         </>
       )}
 
-      {/* Static gradients for reduced motion */}
-      {prefersReducedMotion && (
+      {/* Static gradients for reduced motion OR before hydration */}
+      {!showAnimatedBlobs && (
         <>
           <div
             className="absolute top-0 left-0 w-1/2 h-1/2 opacity-30 blur-3xl"
@@ -66,12 +75,12 @@ export default function AnimatedBackground() {
         </>
       )}
 
-      {/* Subtle grain texture */}
-      {CONFIG.enableGrain && (
+      {/* Subtle grain texture - only render after mount to avoid hydration mismatch */}
+      {mounted && CONFIG.enableGrain && (
         <div
           className="absolute inset-0 opacity-[0.015] dark:opacity-[0.03]"
           style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='4' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='4' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E")`,
             backgroundSize: "200px 200px",
           }}
         />
@@ -82,4 +91,3 @@ export default function AnimatedBackground() {
     </div>
   )
 }
-
